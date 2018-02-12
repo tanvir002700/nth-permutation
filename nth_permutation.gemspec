@@ -1,23 +1,22 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "nth/permutation/version"
+require "nth_permutation/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "nth-permutation"
-  spec.version       = Nth::Permutation::VERSION
+  spec.name          = "nth_permutation"
+  spec.version       = NthPermutation::VERSION
   spec.authors       = ["tanvir hasan"]
   spec.email         = ["tanvir002700@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Write a short summary, because RubyGems requires one.}
+  spec.description   = %q{Write a longer description or delete this line.}
+  spec.homepage      = "http://rubygem.org"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata["allowed_push_host"] = "http://mygemserver.com"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."
@@ -34,4 +33,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency 'rake-compiler', '~> 1.0', '>= 1.0.0'
+  spec.extensions = %w[ext/nth_premutation/extconf.rb]
 end
