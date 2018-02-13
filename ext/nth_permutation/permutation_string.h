@@ -1,6 +1,8 @@
-#ifndef PERMUTATION_STRING
-#define PERMUTATION_STRING
-    #include<ruby.h>
+#ifndef KPERMUTATION_STRING
+#define KPERMUTATION_STRING
 
-    void init_permutation_string(VALUE mNthPermutation);
+#include<ruby.h>
+
+void Init_permutation_string(VALUE mNthPermutation);
 #endif
+
