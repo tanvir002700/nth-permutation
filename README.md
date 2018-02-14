@@ -1,4 +1,11 @@
-# Nth::Permutation
+# NthPermutation
+[![Build Status](https://travis-ci.org/tanvir002700/nth_permutation.svg?branch=master)](https://travis-ci.org/tanvir002700/nth_permutation)
+[![Maintainability](https://api.codeclimate.com/v1/badges/69f40101eeb294c05163/maintainability)](https://codeclimate.com/github/tanvir002700/nth_permutation/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/tanvir002700/nth_permutation/badge.svg?branch=master)](https://coveralls.io/github/tanvir002700/nth_permutation?branch=master)
+[![Gem Version](https://badge.fury.io/rb/nth_permutation.svg)](https://badge.fury.io/rb/nth_permutation)
+[![Downloads](https://img.shields.io/gem/dt/nth_permutation.svg)](https://rubygems.org/gems/nth_permutation)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tanvir002700/nth_permutation/master.svg)](https://github.com/tanvir002700/nth_permutation)
+[![license](https://img.shields.io/github/license/tanvir002700/nth_permutation.svg)](https://github.com/tanvir002700/nth_permutation/blob/master/LICENSE)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nth/permutation`. To experiment with that code, run `bin/console` for an interactive prompt.
 
