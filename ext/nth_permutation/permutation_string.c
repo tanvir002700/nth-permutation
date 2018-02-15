@@ -18,23 +18,28 @@ static VALUE allocate(VALUE klass)
 
     VALUE obj = Data_Make_Struct(klass, struct Str, NULL, deallocate, str);
     str->ptr = NULL;
-    str->fact = (long long int *) calloc(21, sizeof(long long int));
+    str->fact = NULL;
     return obj;
 }
 
-void factorial()
+int * factorial()
 {
-    long long f = 1;
-    for(int i=1; i<30; i++)
+    long long int * fact = (long long int *) calloc(21, sizeof(long long int));
+
+    fact[0] = 1;
+
+    for(int i=1; i<21; i++)
     {
-        f = f*i;
-        fprintf(stderr, "%d factorial: %lld\n",i, f);
+        fact[i] = fact[i-1] * i;
     }
+
+    return fact;
 }
 
 static VALUE initialize(VALUE self, VALUE rb_string)
 {
     struct Str * str;
+    long long int * fact;
 
     Check_Type(rb_string, T_STRING);
     Data_Get_Struct(self, struct Str, str);
@@ -42,10 +47,10 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
     memcpy(str->ptr, StringValuePtr(rb_string), RSTRING_LEN(rb_string));
 
+    str->fact = factorial();
+
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
-
-    factorial();
 
     return self;
 }
