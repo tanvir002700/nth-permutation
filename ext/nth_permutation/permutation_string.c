@@ -20,6 +20,16 @@ static VALUE allocate(VALUE klass)
     return obj;
 }
 
+void factorial()
+{
+    long long f = 1;
+    for(int i=1; i<30; i++)
+    {
+        f = f*i;
+        fprintf(stderr, "%d factorial: %lld\n",i, f);
+    }
+}
+
 static VALUE initialize(VALUE self, VALUE rb_string)
 {
     struct Str * str;
@@ -32,6 +42,8 @@ static VALUE initialize(VALUE self, VALUE rb_string)
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
+
+    factorial();
 
     return self;
 }
