@@ -3,6 +3,7 @@
 
 struct Str
 {
+    long long int * fact;
     char *ptr;
 };
 
@@ -17,6 +18,7 @@ static VALUE allocate(VALUE klass)
 
     VALUE obj = Data_Make_Struct(klass, struct Str, NULL, deallocate, str);
     str->ptr = NULL;
+    str->fact = (long long int *) calloc(21, sizeof(long long int));
     return obj;
 }
 
