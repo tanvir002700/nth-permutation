@@ -44,20 +44,33 @@ int * frequency(char * str)
     return freq;
 }
 
-int number_of_permutation(VALUE self, int * freq)
+int number_of_permutation(long long int * factorial, int * freq, int len)
 {
-    struct Str * str;
-    Data_Get_Struct(self, struct Str, str);
-
-    fprintf(stderr, "%s\n",str->ptr);
-
-    return 0;
+    long long int fact = factorial[len];
+    fprintf(stderr, "total permutation %d\n", fact);
+    for(int i='a'; i<'c'; i++)
+    {
+        fprintf(stderr, "frequency %d\n", freq[i]);
+        fact /= factorial[freq[i]];
+    }
+    return fact;
 }
 
 static VALUE permutation(VALUE self, VALUE nth)
 {
+    struct Str * str;
+    Data_Get_Struct(self, struct Str, str);
+
     int * freq = (int *) calloc(257, sizeof(int));
-    int p = number_of_permutation(self, freq);
+    memcpy(freq, str->frequency, 257*sizeof(int));
+
+    fprintf(stderr, "before sending function %d\n", str->frequency['a']);
+    fprintf(stderr, "before sending function %d\n", freq['a']);
+
+    int p = number_of_permutation(str->factorial, freq, strlen(str->ptr));
+    fprintf(stderr, "possible permutation %d\n", p);
+
+
     return Qtrue;
 }
 
