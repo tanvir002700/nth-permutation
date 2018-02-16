@@ -46,13 +46,11 @@ int * frequency(char * str)
     return freq;
 }
 
-int number_of_permutation(long long int * factorial, int * freq, int len)
+int number_of_permutation(const long long int * factorial, const int * freq, int len)
 {
     long long int fact = factorial[len];
-    fprintf(stderr, "total permutation %d\n", fact);
     for(int i='a'; i<'c'; i++)
     {
-        fprintf(stderr, "frequency %d\n", freq[i]);
         fact /= factorial[freq[i]];
     }
     return fact;
@@ -70,30 +68,42 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     int len = strlen(str->ptr);
 
+    char * nth_permutation = (char *) calloc(len + 1, sizeof(char));
+    int indx = 0;
+
     while(len)
     {
         long long upto = 0;
-        for(int i=0; i<257; i++)
+        for(int i='a'; i<'e'; i++)
         {
             if(!freq[i])continue;
             freq[i] -= 1;
-            long long int now_permutation = number_of_permutation(str->factorial, freq, str->len);
+
+            fprintf(stderr, "here come for %c -> and len %d\n", i, len);
+
+            for(int i='a'; i<= 'd'; i++) fprintf(stderr, "-> %d\n", freq[i]);
+            for(int i='a'; i<= 'd'; i++) fprintf(stderr, "---> %d\n", str->frequency[i]);
+
+            long long int now_permutation = number_of_permutation(str->factorial, freq, len-1);
+            fprintf(stderr, "new permutation %d\n", now_permutation);
             if(upto + now_permutation >= nth)
             {
                 nth -= upto;
                 fprintf(stderr, "%c\n", (char)i);
+                nth_permutation[indx++] = (char) i;
                 len--;
                 break;
             }
             else
             {
                 upto += now_permutation;
-                freq[i]+=i;
+                freq[i] += 1;
             }
         }
     }
+    nth_permutation[str->len] = NULL;
 
-    return Qtrue;
+    return rb_str_new2(nth_permutation);
 }
 
 static VALUE initialize(VALUE self, VALUE rb_string)
