@@ -3,7 +3,8 @@
 
 struct Str
 {
-    long long int * fact;
+    long long int * factorial;
+    int * frequency;
     char *ptr;
 };
 
@@ -17,8 +18,11 @@ static VALUE allocate(VALUE klass)
     struct Str * str = (struct Str *)malloc(sizeof(struct Str));
 
     VALUE obj = Data_Make_Struct(klass, struct Str, NULL, deallocate, str);
+
     str->ptr = NULL;
-    str->fact = NULL;
+    str->factorial = NULL;
+    str->frequency = NULL;
+
     return obj;
 }
 
@@ -47,7 +51,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
     memcpy(str->ptr, StringValuePtr(rb_string), RSTRING_LEN(rb_string));
 
-    str->fact = factorial();
+    str->factorial = factorial();
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
