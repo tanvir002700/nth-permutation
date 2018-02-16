@@ -6,6 +6,7 @@ struct Str
     long long int * factorial;
     int * frequency;
     char *ptr;
+    int len;
 };
 
 static void deallocate(struct Str *str)
@@ -20,6 +21,7 @@ static VALUE allocate(VALUE klass)
     str->ptr = NULL;
     str->factorial = NULL;
     str->frequency = NULL;
+    str->len = 0;
     return obj;
 }
 
@@ -56,20 +58,40 @@ int number_of_permutation(long long int * factorial, int * freq, int len)
     return fact;
 }
 
-static VALUE permutation(VALUE self, VALUE nth)
+static VALUE permutation(VALUE self, VALUE rb_nth)
 {
     struct Str * str;
     Data_Get_Struct(self, struct Str, str);
 
+    int nth = FIX2INT(rb_nth);
+
     int * freq = (int *) calloc(257, sizeof(int));
     memcpy(freq, str->frequency, 257*sizeof(int));
 
-    fprintf(stderr, "before sending function %d\n", str->frequency['a']);
-    fprintf(stderr, "before sending function %d\n", freq['a']);
+    int len = strlen(str->ptr);
 
-    int p = number_of_permutation(str->factorial, freq, strlen(str->ptr));
-    fprintf(stderr, "possible permutation %d\n", p);
-
+    while(len)
+    {
+        long long upto = 0;
+        for(int i=0; i<257; i++)
+        {
+            if(!freq[i])continue;
+            freq[i] -= 1;
+            long long int now_permutation = number_of_permutation(str->factorial, freq, str->len);
+            if(upto + now_permutation >= nth)
+            {
+                nth -= upto;
+                fprintf(stderr, "%c\n", (char)i);
+                len--;
+                break;
+            }
+            else
+            {
+                upto += now_permutation;
+                freq[i]+=i;
+            }
+        }
+    }
 
     return Qtrue;
 }
@@ -87,6 +109,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
 
     str->factorial = factorial();
     str->frequency = frequency(str->ptr);
+    str->len = strlen(str->ptr);
 
     for(int i='a'; i<'z'; i++)fprintf(stderr, "%d\n", str->frequency[i]);
 
