@@ -44,6 +44,23 @@ int * frequency(char * str)
     return freq;
 }
 
+int number_of_permutation(VALUE self, int * freq)
+{
+    struct Str * str;
+    Data_Get_Struct(self, struct Str, str);
+
+    fprintf(stderr, "%s\n",str->ptr);
+
+    return 0;
+}
+
+static VALUE permutation(VALUE self, VALUE nth)
+{
+    int * freq = (int *) calloc(257, sizeof(int));
+    int p = number_of_permutation(self, freq);
+    return Qtrue;
+}
+
 static VALUE initialize(VALUE self, VALUE rb_string)
 {
     struct Str * str;
@@ -72,6 +89,8 @@ void Init_permutation_string(VALUE mNthPermutation)
 
     rb_define_alloc_func(cPermutationString, allocate);
     rb_define_method(cPermutationString, "initialize", initialize, 1);
+    rb_define_method(cPermutationString, "permutation", permutation, 1);
     rb_define_attr(cPermutationString, "str", 1, 0);
     rb_define_attr(cPermutationString, "length", 1, 0);
 }
+
