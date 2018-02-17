@@ -1,6 +1,9 @@
 #include<ruby.h>
 #include<string.h>
 
+const int CHACARTERS = 257;
+const int LIMIT = 21;
+
 struct Str
 {
     long long int * factorial;
@@ -27,9 +30,9 @@ static VALUE allocate(VALUE klass)
 
 int * factorial()
 {
-    long long int * fact = (long long int *) calloc(21, sizeof(long long int));
+    long long int * fact = (long long int *) calloc(LIMIT, sizeof(long long int));
     fact[0] = 1;
-    for(int i=1; i<21; i++)
+    for(int i=1; i<LIMIT; i++)
     {
         fact[i] = fact[i-1] * i;
     }
@@ -38,7 +41,7 @@ int * factorial()
 
 int * frequency(char * str)
 {
-    int * freq = (int *) calloc(257, sizeof(int));
+    int * freq = (int *) calloc(CHACARTERS, sizeof(int));
     for(int i=0; str[i]; i++)
     {
         freq[str[i]]++;
@@ -46,10 +49,10 @@ int * frequency(char * str)
     return freq;
 }
 
-int number_of_permutation(const long long int * factorial, const int * freq, int len)
+long long int number_of_permutation(const long long int * factorial, const int * freq, int len)
 {
     long long int fact = factorial[len];
-    for(int i='a'; i<'c'; i++)
+    for(int i=0; i<CHACARTERS; i++)
     {
         fact /= factorial[freq[i]];
     }
@@ -63,8 +66,10 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     int nth = FIX2INT(rb_nth);
 
-    int * freq = (int *) calloc(257, sizeof(int));
-    memcpy(freq, str->frequency, 257*sizeof(int));
+    int * freq = (int *) calloc(CHACARTERS, sizeof(int));
+    memcpy(freq, str->frequency, CHACARTERS*sizeof(int));
+
+    for(int i='a'; i<'z'; i++)fprintf(stderr, "frequency %c %d\n", i, freq[i]);
 
     int len = strlen(str->ptr);
 
@@ -73,8 +78,10 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     while(len)
     {
+        fprintf(stderr, "Enter for Length: %d\n", len);
+        for(int i='a'; i<'z'; i++)fprintf(stderr, "frequency %c %d\n", i, freq[i]);
         long long upto = 0;
-        for(int i='a'; i<'e'; i++)
+        for(int i='a'; i<'z'; i++)
         {
             if(!freq[i])continue;
             freq[i] -= 1;
@@ -105,6 +112,10 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     long long int * fact;
 
     Check_Type(rb_string, T_STRING);
+    if(RSTRING_LEN(rb_string) >= LIMIT)
+    {
+        rb_raise(rb_eTypeError, "can't handle more than 20 character length string");
+    }
     Data_Get_Struct(self, struct Str, str);
 
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
