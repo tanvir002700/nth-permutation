@@ -79,17 +79,10 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
             if(!freq[i])continue;
             freq[i] -= 1;
 
-            fprintf(stderr, "here come for %c -> and len %d\n", i, len);
-
-            for(int i='a'; i<= 'd'; i++) fprintf(stderr, "-> %d\n", freq[i]);
-            for(int i='a'; i<= 'd'; i++) fprintf(stderr, "---> %d\n", str->frequency[i]);
-
             long long int now_permutation = number_of_permutation(str->factorial, freq, len-1);
-            fprintf(stderr, "new permutation %d\n", now_permutation);
             if(upto + now_permutation >= nth)
             {
                 nth -= upto;
-                fprintf(stderr, "%c\n", (char)i);
                 nth_permutation[indx++] = (char) i;
                 len--;
                 break;
@@ -120,8 +113,6 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     str->factorial = factorial();
     str->frequency = frequency(str->ptr);
     str->len = strlen(str->ptr);
-
-    for(int i='a'; i<'z'; i++)fprintf(stderr, "%d\n", str->frequency[i]);
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
