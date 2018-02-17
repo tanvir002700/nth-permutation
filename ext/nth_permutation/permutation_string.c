@@ -69,8 +69,6 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
     memcpy(freq, str->frequency, CHACARTERS*sizeof(int));
 
-    for(int i='a'; i<'z'; i++)fprintf(stderr, "frequency %c %d\n", i, freq[i]);
-
     int len = strlen(str->ptr);
 
     char * nth_permutation = (char *) calloc(len + 1, sizeof(char));
@@ -78,8 +76,6 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     while(len)
     {
-        fprintf(stderr, "Enter for Length: %d\n", len);
-        for(int i='a'; i<'z'; i++)fprintf(stderr, "frequency %c %d\n", i, freq[i]);
         long long upto = 0;
         for(int i='a'; i<'z'; i++)
         {
