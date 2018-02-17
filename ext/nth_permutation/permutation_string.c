@@ -64,6 +64,7 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
     struct Str * str;
     Data_Get_Struct(self, struct Str, str);
 
+    Check_Type(rb_nth, T_FIXNUM);
     int nth = FIX2INT(rb_nth);
 
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
