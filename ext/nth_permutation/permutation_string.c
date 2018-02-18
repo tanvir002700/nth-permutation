@@ -96,6 +96,8 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
     }
     nth_permutation[str->len] = NULL;
 
+    free(freq);
+
     return rb_str_new2(nth_permutation);
 }
 
