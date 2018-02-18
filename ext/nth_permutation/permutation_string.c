@@ -7,6 +7,7 @@ const int LIMIT = 21;
 struct Str
 {
     long long int * factorial;
+    long long int possible_permutation;
     int * frequency;
     char *ptr;
     int len;
@@ -25,6 +26,7 @@ static VALUE allocate(VALUE klass)
     str->factorial = NULL;
     str->frequency = NULL;
     str->len = 0;
+    str->possible_permutation = 0;
     return obj;
 }
 
@@ -66,6 +68,10 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     Check_Type(rb_nth, T_FIXNUM);
     int nth = FIX2INT(rb_nth);
+    if(nth > str->possible_permutation)
+    {
+        rb_raise(rb_eTypeError, "there s no such nth permutation.");
+    }
 
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
     memcpy(freq, str->frequency, CHACARTERS*sizeof(int));
@@ -118,9 +124,10 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
     memcpy(str->ptr, StringValuePtr(rb_string), RSTRING_LEN(rb_string));
 
+    str->len = strlen(str->ptr);
     str->factorial = factorial();
     str->frequency = frequency(str->ptr);
-    str->len = strlen(str->ptr);
+    str->possible_permutation = number_of_permutation(str->factorial, str->frequency, str->len);
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
