@@ -102,7 +102,6 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 static VALUE initialize(VALUE self, VALUE rb_string)
 {
     struct Str * str;
-    long long int * fact;
 
     Check_Type(rb_string, T_STRING);
     if(RSTRING_LEN(rb_string) >= LIMIT) rb_raise(rb_eRangeError, "can't handle more than 20 character length string");
