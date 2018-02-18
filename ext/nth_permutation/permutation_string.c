@@ -15,6 +15,9 @@ struct Str
 
 static void deallocate(struct Str *str)
 {
+    if(str->factorial) free(str->factorial);
+    if(str->frequency) free(str->frequency);
+    if(str->ptr) free(str->ptr);
     free(str);
 }
 
