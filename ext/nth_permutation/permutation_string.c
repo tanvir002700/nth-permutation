@@ -33,31 +33,24 @@ static VALUE allocate(VALUE klass)
 int * factorial()
 {
     long long int * fact = (long long int *) calloc(LIMIT, sizeof(long long int));
+
     fact[0] = 1;
-    for(int i=1; i<LIMIT; i++)
-    {
-        fact[i] = fact[i-1] * i;
-    }
+    for(int i=1; i<LIMIT; i++) fact[i] = fact[i-1] * i;
+
     return fact;
 }
 
 int * frequency(char * str)
 {
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
-    for(int i=0; str[i]; i++)
-    {
-        freq[str[i]]++;
-    }
+    for(int i=0; str[i]; i++) freq[str[i]]++;
     return freq;
 }
 
 long long int number_of_permutation(const long long int * factorial, const int * freq, int len)
 {
     long long int fact = factorial[len];
-    for(int i=0; i<CHACARTERS; i++)
-    {
-        fact /= factorial[freq[i]];
-    }
+    for(int i=0; i<CHACARTERS; i++) fact /= factorial[freq[i]];
     return fact;
 }
 
@@ -68,10 +61,7 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     Check_Type(rb_nth, T_FIXNUM);
     int nth = FIX2INT(rb_nth);
-    if(nth > str->possible_permutation)
-    {
-        rb_raise(rb_eTypeError, "there s no such nth permutation.");
-    }
+    if(nth > str->possible_permutation) rb_raise(rb_eTypeError, "there's no such nth permutation.");
 
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
     memcpy(freq, str->frequency, CHACARTERS*sizeof(int));
@@ -115,10 +105,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     long long int * fact;
 
     Check_Type(rb_string, T_STRING);
-    if(RSTRING_LEN(rb_string) >= LIMIT)
-    {
-        rb_raise(rb_eTypeError, "can't handle more than 20 character length string");
-    }
+    if(RSTRING_LEN(rb_string) >= LIMIT) rb_raise(rb_eTypeError, "can't handle more than 20 character length string");
     Data_Get_Struct(self, struct Str, str);
 
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
