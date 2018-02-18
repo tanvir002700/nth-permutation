@@ -61,7 +61,7 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
 
     Check_Type(rb_nth, T_FIXNUM);
     int nth = FIX2INT(rb_nth);
-    if(nth > str->possible_permutation) rb_raise(rb_eTypeError, "there's no such nth permutation.");
+    if(nth > str->possible_permutation) rb_raise(rb_eRangeError, "there's no such nth permutation.");
 
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
     memcpy(freq, str->frequency, CHACARTERS*sizeof(int));
