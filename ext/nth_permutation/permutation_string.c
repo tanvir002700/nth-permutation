@@ -77,7 +77,7 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
     while(len)
     {
         long long upto = 0;
-        for(int i='a'; i<'z'; i++)
+        for(int i=0; i<CHACARTERS; i++)
         {
             if(!freq[i])continue;
             freq[i] -= 1;
