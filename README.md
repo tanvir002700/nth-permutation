@@ -7,9 +7,7 @@
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/tanvir002700/nth_permutation/master.svg)](https://github.com/tanvir002700/nth_permutation)
 [![license](https://img.shields.io/github/license/tanvir002700/nth_permutation.svg)](https://github.com/tanvir002700/nth_permutation/blob/master/LICENSE)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/nth/permutation`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is NthPermutation implemanted with c Extension. A super first permutation finding library in ruby.
 
 ## Installation
 
