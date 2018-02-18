@@ -63,7 +63,7 @@ static VALUE permutation(VALUE self, VALUE rb_nth)
     Data_Get_Struct(self, struct Str, str);
 
     Check_Type(rb_nth, T_FIXNUM);
-    int nth = FIX2INT(rb_nth);
+    long long int nth = NUM2LL(rb_nth);
     if(nth > str->possible_permutation) rb_raise(rb_eRangeError, "there's no such nth permutation.");
 
     int * freq = (int *) calloc(CHACARTERS, sizeof(int));
@@ -122,7 +122,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
-    rb_iv_set(self, "@possible_permutation", INT2NUM(str->possible_permutation));
+    rb_iv_set(self, "@possible_permutation", LL2NUM(str->possible_permutation));
 
     return self;
 }
