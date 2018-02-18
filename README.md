@@ -14,7 +14,7 @@ This gem is NthPermutation implemanted with c Extension. A super first permutati
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'nth-permutation'
+gem 'nth_permutation'
 ```
 
 And then execute:
@@ -23,11 +23,16 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install nth-permutation
+    $ gem install nth_permutation
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+require nth_permutation
+p = NthPermutation::String.new 'abc'
+p.permutation 2 #=> 'acb'
+p.possible_permutation #=> 6
+```
 
 ## Development
 
