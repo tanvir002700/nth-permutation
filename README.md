@@ -33,6 +33,9 @@ p = NthPermutation::String.new 'abc'
 p.permutation 2 #=> 'acb'
 p.possible_permutation #=> 6
 ```
+## Limitation
+
+Can't handle more than 20 character longer string.
 
 ## Development
 
