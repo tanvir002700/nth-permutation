@@ -13,6 +13,10 @@ module NthPermutation
         it 'return a Type Error Exception' do
           expect{ described_class.new 'abcdefghijklmnopqrstuv' }.to raise_error(RangeError)
         end
+
+        it 'return a Range Error Exception' do
+          expect{ (described_class.new 'abc').permutation -1 }.to raise_error(RangeError)
+        end
       end
     end
 
