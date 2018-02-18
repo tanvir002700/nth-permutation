@@ -118,6 +118,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
 
     rb_iv_set(self, "@str", rb_string);
     rb_iv_set(self, "@length", INT2NUM(RSTRING_LEN(rb_string)));
+    rb_iv_set(self, "@possible_permutation", INT2NUM(str->possible_permutation));
 
     return self;
 }
@@ -131,5 +132,6 @@ void Init_permutation_string(VALUE mNthPermutation)
     rb_define_method(cPermutationString, "permutation", permutation, 1);
     rb_define_attr(cPermutationString, "str", 1, 0);
     rb_define_attr(cPermutationString, "length", 1, 0);
+    rb_define_attr(cPermutationString, "possible_permutation", 1, 0);
 }
 
