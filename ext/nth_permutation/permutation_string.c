@@ -105,7 +105,7 @@ static VALUE initialize(VALUE self, VALUE rb_string)
     long long int * fact;
 
     Check_Type(rb_string, T_STRING);
-    if(RSTRING_LEN(rb_string) >= LIMIT) rb_raise(rb_eTypeError, "can't handle more than 20 character length string");
+    if(RSTRING_LEN(rb_string) >= LIMIT) rb_raise(rb_eRangeError, "can't handle more than 20 character length string");
     Data_Get_Struct(self, struct Str, str);
 
     str->ptr = calloc(RSTRING_LEN(rb_string) + 1 , sizeof(char));
