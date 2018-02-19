@@ -3,7 +3,7 @@ RSpec.describe NthPermutation do
     expect(NthPermutation::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(true).to eq(true)
+  it "return valid version number" do
+    expect(NthPermutation::VERSION).to eq('0.1.0')
   end
 end
