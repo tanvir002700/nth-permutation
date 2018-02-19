@@ -20,6 +20,12 @@ module NthPermutation
       end
     end
 
+    describe '#inspect' do
+      it 'return actual string' do
+        expect(String.new('abc').inspect).to eq('abc')
+      end
+    end
+
     describe 'attribue accessors' do
       context '.str attribue' do
         it 'return main string' do
