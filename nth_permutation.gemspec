@@ -8,10 +8,11 @@ Gem::Specification.new do |spec|
   spec.authors       = ["tanvir hasan"]
   spec.email         = ["tanvir002700@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
-  spec.homepage      = "http://rubygem.org"
+  spec.summary       = %q{A permutation finding library in Ruby.}
+  spec.description   = %q{Nth permutation finding algorithm, which is implemented in ruby c-extension.}
+  spec.homepage      = "https://rubygems.org/gems/nth_permutation"
   spec.license       = "MIT"
+  spec.metadata      = { 'source_code_uri' => 'https://github.com/tanvir002700/nth_permutation' }
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
