@@ -28,7 +28,7 @@ Or install it yourself as:
 ## Usage
 
 ``` ruby
-require nth_permutation
+require 'nth_permutation'
 p = NthPermutation::String.new 'abc'
 p.permutation 2 #=> 'acb'
 p.possible_permutation #=> 6
